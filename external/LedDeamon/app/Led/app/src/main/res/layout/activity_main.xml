@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.gaoee.led.MainActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/startservice"
+        android:id="@+id/buttonStartService"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        />
+    <!--android:onClick="buttonStartServiceClicked"-->
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stopservice"
+        android:id="@+id/buttonStopService"
+        android:layout_below="@+id/buttonStartService"
+        android:layout_alignParentStart="true"
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alarm"
+        android:id="@+id/checkBoxAlarm"
+        android:layout_below="@+id/buttonStopService"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:onClick="checkboxAlarmClicked"
+    />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/usb"
+        android:id="@+id/checkBoxUsb"
+        android:layout_below="@+id/checkBoxAlarm"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:onClick="checkboxUsbClicked"
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/play"
+        android:id="@+id/checkBoxPlay"
+        android:layout_below="@+id/checkBoxUsb"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:onClick="checkboxPlayClicked"
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pause"
+        android:id="@+id/checkBoxPause"
+        android:layout_below="@+id/checkBoxPlay"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:onClick="checkboxPauseClicked"
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sec"
+        android:id="@+id/checkBoxSec"
+        android:layout_below="@+id/checkBoxPause"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:onClick="checkboxSecClicked"
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/eth"
+        android:id="@+id/checkBoxEth"
+        android:layout_below="@+id/checkBoxSec"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:onClick="checkboxEthClicked"
+        />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/wifi"
+        android:id="@+id/checkBoxWifi"
+        android:layout_below="@+id/checkBoxEth"
+        android:layout_alignParentStart="true"
+        android:checked="false"
+        android:onClick="checkboxWifiClicked"
+        />
+</RelativeLayout>

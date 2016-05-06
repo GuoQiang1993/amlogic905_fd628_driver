@@ -1,5 +1,5 @@
 /* ***************************************************************************************** *
- *	公司名称	:		福大海矽微电子有限公司（FUZHOU FUDA HISI MICROELECTRONICS CO.,LTD）
+ *	公司名称	:	福大海矽微电子有限公司（FUZHOU FUDA HISI MICROELECTRONICS CO.,LTD）
  *	创建人		：	袁文斌
  *	文件名		：	FD628_DRIVE.C
  *	功能描述	：	FD628驱动的头文件，需要移植修改和调用的文件
@@ -9,12 +9,8 @@
 #ifndef __FD628_Drive_H__
 #define __FD628_Drive_H__
 
-#if 1 //def  FD628_Drive_GLOBALS
 #define FD628_Drive_EXT
-#else
-#define FD628_Drive_EXT  extern
-#endif
-//#include 	"../SYSTEM/includes.H"
+
 /* *************************************************************************************************************************************
  *            a
  *         -------
@@ -59,11 +55,14 @@
 #define		NEGA_LED_S 0X6d
 #define		NEGA_LED_y 0X6e
 #define		NEGA_LED__ 0x08
+
 /* **************************************API*********************************************** */
+
 /* *************************用户需要修改部分************************** */
-typedef unsigned char            BOOLEAN;       /* 布尔变量布尔变量*/
-typedef unsigned char  INT8U;         /* 无符号8位数*/
-typedef unsigned int  INT32U;         /* 无符号32位数*/
+typedef unsigned char           BOOLEAN;       /* 布尔变量布尔变量*/
+typedef unsigned char  			INT8U;         /* 无符号8位数*/
+typedef unsigned int  			INT32U;        /* 无符号32位数*/
+
 /* **************按键名和对应码值定义********************** */
 #define FD628_KEY10 	0x00000200
 #define FD628_KEY9 		0x00000100
@@ -79,6 +78,8 @@ typedef unsigned int  INT32U;         /* 无符号32位数*/
 
 #define FD628_DELAY_KEY_SCAN             //延时10ms
 #define FD628_DISP_NORMAL	 (FD628_DISP_ON|FD628_Brightness_8 )
+
+
 /* *************************用户不需要修改部分************************** */
 /* ************** 控制FD628的宏 ********************** */
 #define FD628_4DIG_MODE 					FD628_Command(FD628_4DIG_CMD)						/*设置FD628工作在4位模式*/
@@ -86,6 +87,8 @@ typedef unsigned int  INT32U;         /* 无符号32位数*/
 #define FD628_6DIG_MODE 					FD628_Command(FD628_6DIG_CMD)						/*设置FD628工作在6位模式*/
 #define FD628_7DIG_MODE 					FD628_Command(FD628_7DIG_CMD)						/*设置FD628工作在7位模式*/
 #define FD628_Disp_Brightness_SET(Status)	FD628_Command(FD628_DISP_STATUE_WRCMD |(Status&0x0f))   	/*设置FD628的显示方式（亮度和显示开关）*/
+
+
 /* *************************************************************************************************************************************** *
 *	Status说明	| bit7	| bit6	| bit5	| bit4	| bit3			| bit2	| bit1	| bit0	| 		 Display_EN：显示使能位，1：打开显示；0：关闭显示
 *				| 0		| 0		| 0		| 0		| Display_EN	|	brightness[3:0]		|		 brightness：显示亮度控制位，000～111 分别代表着1（min）～8（max）级亮度
@@ -104,7 +107,7 @@ typedef unsigned int  INT32U;         /* 无符号32位数*/
 #define FD628_Brightness_8        				0x07		/*设置FD628显示亮度等级为8*/
 
 #define	FD628_WAIT_KEY_FREE		 		while(FD628_GetKey()!=FD628_KEY_NONE_CODE);		//等待按键释放
-#define	FD628_WAIT_KEY_PRESS			while(FD628_GetKey()==FD628_KEY_NONE_CODE);		//等待按键按下	 														 									//按键扫描时间 20ms
+#define	FD628_WAIT_KEY_PRESS			while(FD628_GetKey()==FD628_KEY_NONE_CODE);		//等待按键按下													 									//按键扫描时间 20ms
 /* ****************** 函数 ************************** */
 /****************************************************************
  *	函数的名称:					    FD628_Command

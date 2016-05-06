@@ -904,18 +904,25 @@
 		led_gpio = <&gpio_ao  GPIOAO_13  GPIO_ACTIVE_HIGH>;
 		led_active_low = <1>;
 	};
-
-    /* vfd overlay, by leon@20160415 */
-    meson-vfd{
+	/* vfd overlay, by leon@20160415 */
+	aml_vfd{
 		compatible = "amlogic, aml_vfd";
-		dev_name = "meson-vfd";
+		dev_name = "aml_vfd";
 		status = "okay";
-		pinctrl-names="default";
-		pinctrl-0=<&vfd_pins>;
-        /* set gpio description */
+		/* set gpio description, 低有效 */
         fd628_gpio_clk = <&gpio       GPIOY_13       GPIO_ACTIVE_HIGH>;
         fd628_gpio_dat = <&gpio       GPIOY_14       GPIO_ACTIVE_HIGH>;
         fd628_gpio_stb = <&gpio       GPIOY_15       GPIO_ACTIVE_HIGH>;
+	};
+	fd628_dev{
+		compatible = "amlogic,fd628_dev";
+		status = "okay";
+		/*clk_pin = "GPIOX_16";
+		dat_pin = "GPIOX_17";
+		stb_pin = "GPIOX_18";*/
+		fd628_gpio_clk = <&gpio       GPIOY_13       GPIO_ACTIVE_HIGH>;
+		fd628_gpio_dat = <&gpio       GPIOY_14       GPIO_ACTIVE_HIGH>;
+		fd628_gpio_stb = <&gpio       GPIOY_15       GPIO_ACTIVE_HIGH>;
 	};
 };
 

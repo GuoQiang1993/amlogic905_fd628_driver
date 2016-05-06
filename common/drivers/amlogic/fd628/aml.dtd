@@ -1,0 +1,14 @@
+#ifdef CONFIG_AML_FD650
+//$$ DEVICE="fd628_dev"
+//$$ L2 PROP_STR = "status"
+//$$ L2 PROP_STR = "clk_pin"
+//$$ L2 PROP_STR = "dat_pin"
+    fd628_dev{
+		compatible = "amlogic,fd628_dev";
+		status = "okay";
+		fd628_gpio_clk = "GPIOY_13";
+		fd628_gpio_dat = "GPIOY_14";
+		fd628_gpio_stb = "GPIOY_15";
+
+	};
+#endif

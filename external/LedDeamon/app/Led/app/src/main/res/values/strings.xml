@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Hardware Service</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="startservice">StartService</string>
+    <string name="stopservice">StopService</string>
+    <string name="alarm">alarm</string>
+    <string name="usb">Usb</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="sec">Sec</string>
+    <string name="eth">Eth</string>
+    <string name="wifi">Wifi</string>
+</resources>

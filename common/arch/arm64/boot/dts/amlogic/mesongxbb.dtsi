@@ -365,7 +365,7 @@
 			amlogic,setmask=<2 0x30000000>;
 			amlogic,pins="GPIODV_24", "GPIODV_25";
 		};
-        /* vfd overlay, by leon@20160415 */ 
+        /* vfd overlay, by leon@20160415 */
 		/*c_uart_pins:c_uart{
 			amlogic,setmask=<1 0xc0000>;
 			amlogic,pins="GPIOY_13", "GPIOY_14";
@@ -556,7 +556,8 @@
 			amlogic,clrmask = <2 0xf0000 1 0x7>;
 			amlogic,pins = "GPIOY_0","GPIOY_1","GPIOY_2","GPIOY_3";
 		};
-        /* vfd overlay, by leon@20160415 */ 
+        /* vfd overlay, by leon@20160415 */
+		/*
         vfd_pins:vfd_pin{
         amlogic,clrmask = <8 0x30
             5 0x6000
@@ -564,7 +565,7 @@
             3 0x100000
             7 0x40000000>;
         amlogic,pins="GPIOY_13,GPIOY_14,GPIOY_15";
-        };
+        };*/
 
 	};
 	cpu_version{

@@ -9,4 +9,4 @@ obj-$(CONFIG_AM_INPUT) += remote/
 obj-$(CONFIG_AM_INPUT) += keyboard/
 obj-$(CONFIG_AM_INPUT) += gpio_key/
 obj-$(CONFIG_AM_INPUT) += sensor/
-obj-$(CONFIG_AM_INPUT) += vfd/
+#obj-$(CONFIG_AM_INPUT) += vfd/

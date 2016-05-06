@@ -20,7 +20,11 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  * author :   tiejun_peng
+ *
+ *
+ * - by leon@2016-04-18 add surpport of FD628 for Amlogic905 MBox platform
  */
+
  /*
  * !!caution:
  */
@@ -90,8 +94,9 @@ struct vfd {
 	unsigned int debug_enable;
 	char set_led_value[12];
 	char cur_led_value[12];
-	struct vfd_key *key;
 	int key_num;
+
+	struct vfd_key *key;
 	char greenLed[2];
 
 #ifdef CONFIG_VFD_FD628SW
@@ -417,7 +422,8 @@ void vfd_timer_sr(unsigned long data)
 		vfd_work(vfd_data);
 #endif
 		if(strcmp(gp_vfd->cur_led_value,gp_vfd->set_led_value)) {
-				vfd_printk("function[%s] line %d current LED value :%s ,set LED value :%s \n",__FUNCTION__,__LINE__,gp_vfd->cur_led_value,gp_vfd->set_led_value);
+				vfd_printk("function[%s] line %d current LED value :%s ,set LED value :%s \n",
+					__FUNCTION__,__LINE__,gp_vfd->cur_led_value,gp_vfd->set_led_value);
 				strcpy(gp_vfd->cur_led_value,gp_vfd->set_led_value);//vfd->cur_ledcode = vfd->set_ledcode;
 				set_vfd_led_value(gp_vfd->cur_led_value);
 				cnt =0;
@@ -473,9 +479,7 @@ static int vfd_dt_parse(struct platform_device *pdev)
 {
 	struct device_node *node;
 	struct vfd *vfd;
-	struct gpio_desc *clk_desc = NULL;
-	struct gpio_desc *dat_desc = NULL;
-	struct gpio_desc *stb_desc = NULL;
+
 
 	vfd = platform_get_drvdata(pdev);
 	node = pdev->dev.of_node;
@@ -485,6 +489,10 @@ static int vfd_dt_parse(struct platform_device *pdev)
 	}
 
 #ifdef CONFIG_VFD_FD628SW
+	struct gpio_desc *clk_desc = NULL;
+	struct gpio_desc *dat_desc = NULL;
+	struct gpio_desc *stb_desc = NULL;
+
 	/*
 	fd628_gpio_clk = <&gpio       GPIOY_13       GPIO_ACTIVE_HIGH>;
 	fd628_gpio_dat = <&gpio       GPIOY_14       GPIO_ACTIVE_HIGH>;
@@ -502,6 +510,8 @@ static int vfd_dt_parse(struct platform_device *pdev)
 	stb_desc = of_get_named_gpiod_flags(node, "fd628_gpio_stb", 0, NULL);
 	vfd->fd628_stb.pin = desc_to_gpio(stb_desc);
 	gpio_request(vfd->fd628_stb.pin, VFD_DEV_NAME);
+
+	printk(KERN_INFO "VFD Driver request fd628_gpio_clk/ \n");
 #endif
 	return 0;
 }
@@ -527,6 +537,7 @@ static int __init vfd_probe(struct platform_device *pdev)
 		return -EINVAL;
     }
 
+	dev_notice(&pdev->dev, "vfd driver probe");
     vfd = kzalloc(sizeof(struct vfd), GFP_KERNEL);
     input_dev = input_allocate_device();
     if (!vfd || !input_dev)
@@ -535,7 +546,8 @@ static int __init vfd_probe(struct platform_device *pdev)
 	memset(vfd, 0, sizeof(struct vfd));
 
     gp_vfd = vfd;
-    vfd->debug_enable = 0;
+	/* FIXME: 关闭调试开关 */
+    vfd->debug_enable = 1;
     vfd_input_dbg = vfd_printk;
 	platform_set_drvdata(pdev, vfd);
 
@@ -598,9 +610,13 @@ static int __init vfd_probe(struct platform_device *pdev)
         dev_err(&pdev->dev, "Unable to register vfdkeypad input device\n");
         goto err2;
     }
-    vfd_input_dbg("input_register_device completed \r\n");
+
+    dev_notice(&pdev->dev, "vfd input_register_device completed \r\n");
 
     register_vfd_dev(gp_vfd);
+
+	printk(KERN_INFO "VFD Driver probed\n");
+
     return 0;
 /*
 err3:
@@ -690,20 +706,20 @@ static struct platform_driver vfd_driver = {
 
 static int __init vfd_init(void)
 {
-    printk(KERN_INFO "VFD Driver\n");
+    printk(KERN_INFO "VFD Driver init\n");
 
     return platform_driver_register(&vfd_driver);
 }
 
 static void __exit vfd_exit(void)
 {
-    printk(KERN_INFO "VFD exit \n");
+    printk(KERN_INFO "VFD driver exit \n");
     platform_driver_unregister(&vfd_driver);
 }
 
 module_init(vfd_init);
 module_exit(vfd_exit);
 
-MODULE_AUTHOR("tiejun_peng");
+MODULE_AUTHOR("tiejun_peng && leon_e");
 MODULE_DESCRIPTION("Amlogic VFD Driver");
 MODULE_LICENSE("GPL");
